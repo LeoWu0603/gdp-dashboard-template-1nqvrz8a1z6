@@ -13,20 +13,12 @@ server = st.secrets["mssql_account"]["server"]
 database = st.secrets["mssql_account"]["database"]
 username = st.secrets["mssql_account"]["username"]
 password = st.secrets["mssql_account"]["password"]
-driver = '{ODBC Driver 17 for SQL Server}'
+driver = 'ODBC Driver 17 for SQL Server'
 
 # Function to fetch data from the database
 def fetch_data():
-    conn_str = (
-        f'DRIVER={driver};'
-        f'SERVER={server};'
-        f'DATABASE={database};'
-        f'UID={username};'
-        f'PWD={password};'
-        f'Encrypt=yes;'
-        f'TrustServerCertificate=yes'
-    )
-    conn = pyodbc.connect(conn_str)
+    # Establish connection
+    conn = pyodbc.connect(f'DRIVER={driver};SERVER={server};DATABASE={database};UID={username};PWD={password}')
     cursor = conn.cursor()
     cursor.execute("SELECT * FROM dbo.v_Predictive_patientunique")
     rows = cursor.fetchall()

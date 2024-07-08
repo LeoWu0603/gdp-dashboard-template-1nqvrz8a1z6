@@ -13,7 +13,7 @@ server = st.secrets["mssql_account"]["server"]
 database = st.secrets["mssql_account"]["database"]
 username = st.secrets["mssql_account"]["username"]
 password = st.secrets["mssql_account"]["password"]
-driver = '{SQL Server}'
+driver = '{ODBC Driver 17 for SQL Server}'
 
 # Function to fetch data from the database
 def fetch_data():

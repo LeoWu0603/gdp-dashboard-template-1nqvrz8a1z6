@@ -17,7 +17,11 @@ driver = '{ODBC Driver 17 for SQL Server}'
 
 # Function to fetch data from the database
 def fetch_data():
-    conn = pyodbc.connect(f'DRIVER={driver};SERVER={server};DATABASE={database};UID={username};PWD={password}')
+    conn = pyodbc.connect(
+        f'DRIVER={driver};SERVER={server};DATABASE={database};UID={username};PWD={password};Encrypt=yes;TrustServerCertificate=yes;'
+        'Connection Timeout=30;'
+        'SSL Protocol=TLSv1.2'
+    )
     cursor = conn.cursor()
     cursor.execute("SELECT * FROM dbo.v_Predictive_patientunique")
     rows = cursor.fetchall()
@@ -25,7 +29,7 @@ def fetch_data():
     cursor.close()
     conn.close()
     return df
-
+    
 # Streamlit app
 st.title('Predictive Patient Data')
 
